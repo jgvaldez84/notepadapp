@@ -3,7 +3,10 @@ import { API } from "aws-amplify";
 import { List, Input, Button } from "antd";
 import "antd/dist/antd.css";
 import { listNotes } from "./graphql/queries";
-import { createNote as CreateNote } from "./graphql/mutations";
+import {
+  createNote as CreateNote,
+  deleteNote as DeleteNote,
+} from "./graphql/mutations";
 import { v4 as uuid } from "uuid";
 import "./App.css";
 
@@ -64,7 +67,25 @@ const App = () => {
         variables: { input: note },
       });
       console.log("successfully created note!");
-      //console.log(note);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const deleteNote = async ({ id }) => {
+    const index = state.notes.findIndex((n) => n.id === id);
+    console.log(index);
+    const notes = [
+      ...state.notes.slice(0, index),
+      state.notes.slice(index + 1),
+    ];
+    dispatch({ type: "SET_NOTES", notes });
+    try {
+      await API.graphql({
+        query: DeleteNote,
+        variables: { input: { id } },
+      });
+      console.log("successfully deleted note");
     } catch (err) {
       console.error(err);
     }
@@ -87,7 +108,14 @@ const App = () => {
 
   const renderItem = (item) => {
     return (
-      <List.Item style={styles.item}>
+      <List.Item
+        style={styles.item}
+        actions={[
+          <p style={styles.p} onClick={() => deleteNote(item)}>
+            Delete
+          </p>,
+        ]}
+      >
         <List.Item.Meta title={item.name} description={item.description} />
       </List.Item>
     );
