@@ -1,8 +1,10 @@
 import React, { useEffect, useReducer } from "react";
 import { API } from "aws-amplify";
-import { List } from "antd";
+import { List, Input, Button } from "antd";
 import "antd/dist/antd.css";
 import { listNotes } from "./graphql/queries";
+import { createNote as CreateNote } from "./graphql/mutations";
+import { v4 as uuid } from 'uuid';
 import "./App.css";
 
 const initialState = {
