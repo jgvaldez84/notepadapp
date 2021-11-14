@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-notepadapp-dev-94041-authRole",
+      "UnauthRoleArn": "arn:aws:iam::530226669709:role/amplify-notepadapp-dev-94041-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::530226669709:role/amplify-notepadapp-dev-94041-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-notepadapp-dev-94041-deployment",
+      "UnauthRoleName": "amplify-notepadapp-dev-94041-unauthRole",
+      "StackName": "amplify-notepadapp-dev-94041",
+      "StackId": "arn:aws:cloudformation:us-east-2:530226669709:stack/amplify-notepadapp-dev-94041/3ad11d10-4561-11ec-9fa7-0a817d5e5d7a",
+      "AmplifyAppId": "dphn2rzifnsxd"
+    }
+  }
+}
