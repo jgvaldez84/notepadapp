@@ -155,7 +155,6 @@ const App = () => {
       },
     });
     
-
     const updateSubscription = API.graphql({
       query: onUpdateNote,
     }).subscribe({
