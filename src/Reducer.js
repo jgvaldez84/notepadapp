@@ -37,7 +37,6 @@ const reducer = (state, action) => {
         newSortMethod = "AZ";
         sortedNotes = state.notes.sort((a, b) => (a.name < b.name ? 1 : -1));
       }
-      console.log(sortedNotes);
       return { ...state, notes: sortedNotes, sortMethod: newSortMethod };
     case "ERROR":
       return { ...state, loading: false, error: true };
