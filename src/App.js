@@ -14,15 +14,12 @@ import {
   createNote as CreateNote,
   deleteNote as DeleteNote,
 } from "./graphql/mutations";
-import { reducer, initialState } from './Reducer.js'
+import { reducer, initialState } from "./Reducer.js";
 import "./App.css";
-
 
 const CLIENT_ID = uuid();
 
-
 const App = () => {
-
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const fetchNotes = async () => {
@@ -36,7 +33,6 @@ const App = () => {
       dispatch({ type: "ERROR" });
     }
   };
-  
 
   const createNote = async () => {
     const { form } = state; //destructuring - form element out of state
@@ -60,7 +56,6 @@ const App = () => {
     }
   };
 
-
   const deleteNote = async ({ id }) => {
     try {
       await API.graphql({
@@ -77,11 +72,13 @@ const App = () => {
     const index = state.notes.findIndex((n) => n.id === note.id);
     const notes = [...state.notes];
     notes[index].completed = !notes[index].completed;
-    console.log(index +1)
+    console.log(index + 1);
     try {
       await API.graphql({
         query: UpdateNote,
-        variables: { input: { id: note.id, completed: notes[index].completed } },
+        variables: {
+          input: { id: note.id, completed: notes[index].completed },
+        },
       });
       console.log("note successfully updated!");
     } catch (err) {
@@ -92,8 +89,6 @@ const App = () => {
   const onChange = (e) => {
     dispatch({ type: "SET_INPUT", name: e.target.name, value: e.target.value });
   };
-
-
 
   useEffect(() => {
     fetchNotes();
@@ -115,7 +110,7 @@ const App = () => {
         dispatch({ type: "REMOVE_NOTE", id: noteId });
       },
     });
-    
+
     const updateSubscription = API.graphql({
       query: onUpdateNote,
     }).subscribe({
@@ -140,13 +135,13 @@ const App = () => {
     p: { color: "#1890ff" },
   };
 
-  const sort = ()=>{
-dispatch({ type: 'SORT' })
-console.log('here')
-  }
+  const sort = () => {
+    dispatch({ type: "SORT" });
+    console.log("here");
+  };
 
+  const RenderItem = (item) => {
 
-  const renderItem = (item) => {
     return (
           
       <List.Item
@@ -155,11 +150,9 @@ console.log('here')
           <p style={styles.p} onClick={() => deleteNote(item)}>
             Delete
           </p>,
-          <p style={styles.p} onClick={() => updateNote(item)}>
-            {item.completed ? "task is completed" : "task needs completion"}
-          </p>,
+         <input type="checkbox" checked={item.completed ? true: false } onChange={()=> updateNote(item)} />
         ]}
-      >
+        >
         <List.Item.Meta title={item.name} description={item.description} />
       </List.Item>
             
@@ -186,18 +179,19 @@ console.log('here')
         Create Note
       </Button>
       <hr />
-      <Button onClick ={sort} type="primary">
-        Sort 
-        </Button>
+      <Button onClick={sort} type="primary">
+        Sort
+      </Button>
       <hr />
       <h2>
-        {0} completed / {0} total
+        {state.notes.filter(x => x.completed === true).length} completed / {state.notes.length} total
       </h2>
       <hr />
       <List
         loading={state.loading}
         dataSource={state.notes}
-        renderItem={renderItem}
+        renderItem={RenderItem}
+
       />
     </div>
   );

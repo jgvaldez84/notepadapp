@@ -26,11 +26,7 @@ const reducer = (state, action) => {
     case "ADD_NOTE":
       return { ...state, notes: [action.note, ...state.notes] };
     case "REMOVE_NOTE":
-      const index = state.notes.findIndex((n) => n.id === action.id);
-      const newNotes = [
-        ...state.notes.slice(0, index), //filter?
-        ...state.notes.slice(index + 1),
-      ];
+      const newNotes = state.notes.filter( x => x.id !== action.id )
       return { ...state, notes: newNotes };
     case "UPDATE_NOTE":
       const updateIndex = state.notes.findIndex(
