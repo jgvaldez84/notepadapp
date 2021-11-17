@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/notepadapp/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/notepadapp/static/js/main.37971c3a.chunk.js",
+    "main.js.map": "/notepadapp/static/js/main.37971c3a.chunk.js.map",
+    "runtime-main.js": "/notepadapp/static/js/runtime-main.e6c8d78f.js",
+    "runtime-main.js.map": "/notepadapp/static/js/runtime-main.e6c8d78f.js.map",
+    "static/css/2.a95be28f.chunk.css": "/notepadapp/static/css/2.a95be28f.chunk.css",
+    "static/js/2.9abec4d5.chunk.js": "/notepadapp/static/js/2.9abec4d5.chunk.js",
+    "static/js/2.9abec4d5.chunk.js.map": "/notepadapp/static/js/2.9abec4d5.chunk.js.map",
+    "static/js/3.42468503.chunk.js": "/notepadapp/static/js/3.42468503.chunk.js",
+    "static/js/3.42468503.chunk.js.map": "/notepadapp/static/js/3.42468503.chunk.js.map",
+    "index.html": "/notepadapp/index.html",
+    "static/css/2.a95be28f.chunk.css.map": "/notepadapp/static/css/2.a95be28f.chunk.css.map",
+    "static/css/main.8c8b27cf.chunk.css.map": "/notepadapp/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.9abec4d5.chunk.js.LICENSE.txt": "/notepadapp/static/js/2.9abec4d5.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e6c8d78f.js",
+    "static/css/2.a95be28f.chunk.css",
+    "static/js/2.9abec4d5.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.37971c3a.chunk.js"
+  ]
+}
