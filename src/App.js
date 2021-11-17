@@ -68,23 +68,22 @@ const App = () => {
     }
   };
 
-  const updateNote = async (note) => {
-    const index = state.notes.findIndex((n) => n.id === note.id);
-    const notes = [...state.notes];
-    notes[index].completed = !notes[index].completed;
-    console.log(index + 1);
+  const updateNote = async(note) => {
+    const index = state.notes.findIndex(n => n.id === note.id)
+    const notes = [...state.notes]
+    notes[index].completed = !note.completed
+    //dispatch({ type: 'SET_NOTES', notes})
     try {
       await API.graphql({
         query: UpdateNote,
-        variables: {
-          input: { id: note.id, completed: notes[index].completed },
-        },
-      });
-      console.log("note successfully updated!");
+        variables: { input: { id: note.id, completed: notes[index].completed } }
+      })
+      console.log('note successfully updated!')
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
-  };
+};
+
 
   const onChange = (e) => {
     dispatch({ type: "SET_INPUT", name: e.target.name, value: e.target.value });
@@ -112,14 +111,14 @@ const App = () => {
     });
 
     const updateSubscription = API.graphql({
-      query: onUpdateNote,
-    }).subscribe({
-      next: (noteData) => {
-        const id = noteData.value.data.onUpdateNote.id;
-        console.log(id);
-        dispatch({ type: "UPDATE_NOTE", updatedNote: id });
-      },
-    });
+      query: onUpdateNote
+      })
+      .subscribe({
+          next: noteData => {
+          const updatedNote = noteData.value.data.onUpdateNote
+          dispatch({ type: 'UPDATE_NOTE', note: updatedNote })
+          }
+      })
 
     return () => {
       createSubscription.unsubscribe();
@@ -137,7 +136,7 @@ const App = () => {
 
   const sort = () => {
     dispatch({ type: "SORT" });
-    console.log("here");
+    dispatch({type: 'UPDATE_NOTE '});
   };
 
   const RenderItem = (item) => {
