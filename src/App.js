@@ -14,54 +14,15 @@ import {
   createNote as CreateNote,
   deleteNote as DeleteNote,
 } from "./graphql/mutations";
+import { reducer, initialState } from './Reducer.js'
 import "./App.css";
 
 
 const CLIENT_ID = uuid();
 
-const initialState = {
-  notes: [],
-  loading: true,
-  error: false,
-  form: { name: "", description: "" }
-};
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "SET_NOTES":
-      return { ...state, notes: action.notes, loading: false };
-    case "ADD_NOTE":
-      return { ...state, notes: [action.note, ...state.notes] };
-    case "REMOVE_NOTE":
-      const index = state.notes.findIndex((n) => n.id === action.id);
-      const newNotes = [
-        ...state.notes.slice(0, index), //filter?
-        ...state.notes.slice(index + 1),
-      ];
-      return { ...state, notes: newNotes };
-    case "UPDATE_NOTE":
-      const updateIndex = state.notes.findIndex(
-        (n) => n.id === action.updatedNote
-      );
-      const updatedNotes = [...state.notes];
-      updatedNotes[updateIndex].completed = !updatedNotes[updateIndex].completed;
-      console.log(updateIndex);
-      console.log(updatedNotes[updateIndex].completed);
-
-      return { ...state, notes: updatedNotes, loading: false };
-
-    case "RESET_FORM":
-      return { ...state, form: initialState.form };
-    case "SET_INPUT":
-      return { ...state, form: { ...state.form, [action.name]: action.value } };
-    case "ERROR":
-      return { ...state, loading: false, error: true };
-    default:
-      return { ...state };
-  }
-};
 
 const App = () => {
+
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const fetchNotes = async () => {
@@ -179,7 +140,10 @@ const App = () => {
     p: { color: "#1890ff" },
   };
 
-  const sort = ()=>{}
+  const sort = ()=>{
+dispatch({ type: 'SORT' })
+console.log('here')
+  }
 
 
   const renderItem = (item) => {
@@ -223,7 +187,7 @@ const App = () => {
       </Button>
       <hr />
       <Button onClick ={sort} type="primary">
-        Sort By New
+        Sort 
         </Button>
       <hr />
       <h2>
