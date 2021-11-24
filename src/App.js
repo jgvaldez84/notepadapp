@@ -136,7 +136,6 @@ const App = () => {
 
   const sort = () => {
     dispatch({ type: "SORT" });
-    dispatch({type: 'UPDATE_NOTE '});
   };
 
   const RenderItem = (item) => {
